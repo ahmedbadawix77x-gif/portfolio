@@ -721,10 +721,13 @@ header#home {
     margin-left: calc(-50vw + 50%);
     position: relative;
     mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
 .projects-marquee {
     display: flex;
+    flex-wrap: nowrap;
+    /* Prevent stacking */
     gap: 3em;
     width: max-content;
     padding-right: 3em;
@@ -748,12 +751,13 @@ header#home {
 }
 
 .projects-marquee .project-card {
-    flex: 0 0 380px;
-    /* Uniform width for marquee items */
-    animation: none;
+    flex: 0 0 380px !important;
+    /* Force uniform width */
+    width: 380px !important;
+    animation: none !important;
     /* Disable entrance animation for marquee */
-    opacity: 1;
-    margin: 0;
+    opacity: 1 !important;
+    margin: 0 !important;
 }
 
 .project-card {
@@ -1082,6 +1086,9 @@ header#home {
 
 .project-visual i:not(.fas.fa-external-link-alt) {
     z-index: 2;
+    font-size: 4rem;
+    /* Ensure large icon size */
+    display: block;
     filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
     animation: floatingIcon 4s ease-in-out infinite;
 }
