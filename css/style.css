@@ -713,6 +713,49 @@ header#home {
     margin: 0 auto;
 }
 
+/* ===== MARQUEE ANIMATION ===== */
+.marquee-container {
+    overflow: hidden;
+    padding: 2em 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.projects-marquee {
+    display: flex;
+    gap: 3em;
+    width: max-content;
+    padding-right: 3em;
+    /* Essential for seamless loop matching the gap */
+    animation: marquee 30s linear infinite;
+}
+
+.projects-marquee:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-33.3333%);
+        /* Resets naturally at the end of the first set */
+    }
+}
+
+.projects-marquee .project-card {
+    flex: 0 0 380px;
+    /* Uniform width for marquee items */
+    animation: none;
+    /* Disable entrance animation for marquee */
+    opacity: 1;
+    margin: 0;
+}
+
 .project-card {
     background: rgba(40, 40, 40, 0.7);
     backdrop-filter: blur(10px);
@@ -1025,6 +1068,62 @@ header#home {
     opacity: 1;
 }
 
+.project-visual {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.4s ease;
+}
+
+.project-visual i:not(.fas.fa-external-link-alt) {
+    z-index: 2;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+    animation: floatingIcon 4s ease-in-out infinite;
+}
+
+@keyframes floatingIcon {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Specific Project Gradients */
+.visual-brazely {
+    background: linear-gradient(135deg, #1a1a1a, #c5a059);
+    /* Gold/Dark for luxury */
+}
+
+.visual-bondok {
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #ff4e50);
+    /* Creative blue/red */
+}
+
+.visual-flower {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    /* Fresh green */
+}
+
+.visual-basbosa {
+    background: linear-gradient(135deg, #ff9966, #ff5e62);
+    /* Warm orange/red */
+}
+
+.project-card.compact .image-overlay {
+    z-index: 10;
+}
+
+/* Updating image-overlay to work with visuals */
 .project-image {
     height: 160px;
     background-size: cover;

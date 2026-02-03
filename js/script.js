@@ -19,11 +19,11 @@ window.addEventListener("load", () => {
 
 // Typing Effect with CV info
 const typingTexts = [
-  "Ahmed Badawi",
-  "Full-Stack Developer",
-  "React & Node.js Enthusiast",
-  "Building for the Future",
-  "Passionate about Code",
+  "Ahmed Badawy",
+  "Website Creator",
+  "Frontend Developer",
+  "UI/UX Enthusiast",
+  "Passion for Code",
 ];
 let typingIndex = 0,
   charIndex = 0,
@@ -162,4 +162,21 @@ document.addEventListener("DOMContentLoaded", () => {
         "rotateX(0) rotateY(0) scale3d(1,1,1)";
     });
   }
+});
+
+// MARQUEE INFINITE LOOP LOGIC
+document.addEventListener("DOMContentLoaded", () => {
+    const marquee = document.querySelector(".projects-marquee");
+    if (marquee) {
+        // Clone the content multiple times to ensure it covers even ultra-wide screens
+        const cards = Array.from(marquee.children);
+        
+        // Clone twice (Total 3 sets) to ensure zero gaps on reset
+        for (let i = 0; i < 2; i++) {
+            cards.forEach((card) => {
+                const clone = card.cloneNode(true);
+                marquee.appendChild(clone);
+            });
+        }
+    }
 });
