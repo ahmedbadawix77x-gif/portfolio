@@ -755,9 +755,49 @@ header#home {
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(76, 201, 240, 0.2);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(76, 201, 240, 0.3);
     border-color: #4cc9f0;
+}
+
+/* Projects background decoration */
+#projects {
+    position: relative;
+    overflow: hidden;
+}
+
+#projects::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(76, 201, 240, 0.1) 0%, transparent 70%);
+    top: 10%;
+    right: -100px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#projects::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(67, 97, 238, 0.08) 0%, transparent 70%);
+    bottom: 5%;
+    left: -150px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.project-tech i {
+    font-size: 1.2rem;
+    margin-right: 8px;
+    transition: color 0.3s ease;
+}
+
+.project-card:hover .project-tech i {
+    color: #4cc9f0;
 }
 
 /* ===== PREMIUM COMPACT PROJECT CARDS ===== */
