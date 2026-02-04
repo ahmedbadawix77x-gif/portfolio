@@ -9,12 +9,14 @@ AOS.init({
 // Splash/Preloader
 window.addEventListener("load", () => {
   setTimeout(() => {
-    document.getElementById("preloader").style.opacity = 0;
-    setTimeout(
-      () => (document.getElementById("preloader").style.display = "none"),
-      900
-    );
-  }, 1650);
+    const preloader = document.getElementById("preloader");
+    if (preloader) {
+      preloader.style.transition = "opacity 1.5s cubic-bezier(0.7, 0, 0.3, 1), visibility 1.5s";
+      preloader.style.opacity = 0;
+      preloader.style.visibility = "hidden";
+      setTimeout(() => (preloader.style.display = "none"), 1600);
+    }
+  }, 2200); // Slightly longer to appreciate the 3D Fakhama
 });
 
 // Typing Effect with CV info

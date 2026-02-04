@@ -6,8 +6,7 @@
     <title>Ahmed Badawy | Full-Stack Developer</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" href="assets/profile-picture.webp">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900;700;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
@@ -23,19 +22,42 @@
     <!-- Splash/Preloader -->
     <div id="preloader">
         <div class="preloader-bg"></div>
-        <div class="preloader-logo">
-            <span class="mono"></></span>
-            <span class="brand">Ahmed Badawy</span>
-        </div>
-        <div class="preloader-loader">
-            <span></span><span></span><span></span>
+        <div class="preloader-3d-scene">
+            <div class="preloader-particles"></div>
+            <div class="glass-plate-system">
+                <div class="glass-plate">
+                    <div class="plate-hologram"></div>
+                    <div class="plate-content">
+                        <span class="plate-symbol">&lt;</span>
+                        <div class="plate-initials">AB</div>
+                        <span class="plate-symbol">&gt;</span>
+                    </div>
+                </div>
+                <!-- 3D Shards floating around -->
+                <div class="shard shard-1">{}</div>
+                <div class="shard shard-2">[]</div>
+                <div class="shard shard-3">/</div>
+                <div class="shard shard-4">&gt;</div>
+            </div>
+            <div class="preloader-lux-text">
+                <span class="lux-line"></span>
+                <span class="lux-brand">Ahmed Badawy</span>
+                <span class="lux-line"></span>
+            </div>
+            <div class="minimal-loader">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </div>
 
     <!-- Navigation -->
     <nav id="navbar">
         <div class="logo" data-aos="fade-down" data-aos-duration="1000">
-            <span class="mono"></></span> Ahmed Badawy
+            <div class="nav-glass-logo">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-letters">AB</span>
+                <span class="logo-bracket">&gt;</span>
+            </div>
         </div>
         <ul>
             <li><a href="#home" class="nav-link active">Home</a></li>
