@@ -164,6 +164,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// ✨ Interactive 3D Tilt for Category Titles
+document.addEventListener("mousemove", (e) => {
+    document.querySelectorAll(".category-title").forEach(title => {
+        const rect = title.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Only trigger if mouse is close to the title (within 200px)
+        const distance = Math.sqrt(Math.pow(x - rect.width/2, 2) + Math.pow(y - rect.height/2, 2));
+        
+        if (distance < 250) {
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateY = ((x - centerX) / centerX) * 10;
+            const rotateX = ((centerY - y) / centerY) * 10;
+            
+            const icon = title.querySelector("i");
+            const span = title.querySelector("span");
+            
+            if(icon) icon.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px) scale(1.1)`;
+            if(span) span.style.transform = `perspective(1000px) rotateX(${rotateX * 0.5}deg) rotateY(${rotateY * 0.5}deg) translateZ(30px) translateX(10px)`;
+        } else {
+            const icon = title.querySelector("i");
+            const span = title.querySelector("span");
+            if(icon) icon.style.transform = "";
+            if(span) span.style.transform = "";
+        }
+    });
+});
+
 // MARQUEE INFINITE LOOP LOGIC
 document.addEventListener("DOMContentLoaded", () => {
     const marquee = document.querySelector(".projects-marquee");
