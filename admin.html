@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Portfolio</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    .admin-wrap { min-height: 100vh; padding: var(--nav-height, 80px) 2rem 2rem; max-width: 900px; margin: 0 auto; }
+    .admin-card { background: rgba(30,30,40,0.9); border-radius: var(--radius-lg, 24px); padding: 2rem; border: 1px solid rgba(76,201,240,0.2); margin-bottom: 2rem; }
+    .admin-card h1 { color: #fff; margin-bottom: 1.5rem; font-size: 1.8rem; }
+    .admin-form { display: flex; flex-direction: column; gap: 1.2rem; max-width: 400px; }
+    .admin-form input { background: rgba(40,40,40,0.8); border: 1px solid #444; color: #fff; padding: 0.9rem 1rem; border-radius: 10px; font-size: 1rem; }
+    .admin-form input:focus { border-color: #4cc9f0; outline: none; }
+    .admin-form button { padding: 0.8rem 1.5rem; background: var(--accent); color: #000; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; }
+    .admin-form button:hover { opacity: 0.95; }
+    .admin-msg { min-height: 24px; color: #4cc9f0; font-weight: 600; }
+    .admin-msg.error { color: #e74c3c; }
+    .admin-nav { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .admin-nav a { color: #4cc9f0; text-decoration: none; }
+    .admin-nav a:hover { color: #fff; }
+    .messages-list { list-style: none; }
+    .messages-list li { background: rgba(20,20,25,0.8); padding: 1rem; border-radius: 12px; margin-bottom: 0.8rem; border-left: 3px solid #4cc9f0; }
+    .messages-list .meta { color: #888; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .messages-list .body { color: #ddd; }
+    .messages-list button { background: transparent; color: #e74c3c; border: 1px solid #e74c3c; padding: 0.3rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; }
+    .messages-list button:hover { background: #e74c3c; color: #fff; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="admin-wrap">
+    <nav class="admin-nav">
+      <a href="index.html"><i class="fas fa-home"></i> Portfolio</a>
+    </nav>
+
+    <div id="login-section" class="admin-card">
+      <h1><i class="fas fa-lock"></i> Admin Login</h1>
+      <form id="login-form" class="admin-form">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Sign In</button>
+        <div id="login-msg" class="admin-msg"></div>
+      </form>
+    </div>
+
+    <div id="dashboard-section" class="admin-card hidden">
+      <h1><i class="fas fa-inbox"></i> Contact Messages</h1>
+      <p style="color:#888; margin-bottom:1rem;">You are logged in. <button type="button" id="logout-btn" style="background:transparent; border:1px solid #e74c3c; color:#e74c3c; padding:0.3rem 0.8rem; border-radius:8px; cursor:pointer;">Logout</button></p>
+      <ul id="messages-list" class="messages-list"></ul>
+      <p id="messages-empty" class="hidden" style="color:#888;">No messages yet.</p>
+    </div>
+  </div>
+  <script>
+      if (typeof window !== 'undefined' && location.hostname === 'localhost' && location.port !== '3000')
+        window.API_BASE = 'http://localhost:3000';
+    </script>
+  <script src="./js/admin.js"></script>
+</body>
+</html>
