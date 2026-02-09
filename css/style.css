@@ -31,6 +31,13 @@ body {
     /* Dark background only */
     overflow-x: hidden;
     scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100vw;
+}
+
+html {
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 /* ===== ANIMATED BACKGROUND SHAPES ===== */
@@ -495,6 +502,8 @@ nav {
     padding: 0 7vw;
     height: var(--nav-height);
     transition: all 0.3s ease;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 nav::before {
@@ -645,10 +654,12 @@ nav .nav-link:hover::after {
 
 /* ===== SECTIONS ===== */
 .parallax-section {
-    padding: calc(var(--section-pad) + 80px) 0 var(--section-pad);
+    padding: calc(var(--section-pad) + 80px) var(--section-pad) var(--section-pad);
     position: relative;
     background-color: #0a0a0a;
     /* Consistent dark background */
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 section h2 {
@@ -702,6 +713,8 @@ header#home {
     display: flex;
     align-items: center;
     gap: 5vw;
+    max-width: 100%;
+    padding: 0 2rem;
 }
 
 .hero-img-container {
@@ -1090,18 +1103,19 @@ header#home {
 /* ===== PROJECTS ===== */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
     gap: 2.3em;
     max-width: 1100px;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 /* ===== MARQUEE ANIMATION ===== */
 .marquee-container {
     overflow: hidden;
     padding: 2em 0;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    width: 100%;
+    max-width: 100vw;
     position: relative;
     mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
@@ -1134,9 +1148,9 @@ header#home {
 }
 
 .projects-marquee .project-card {
-    flex: 0 0 380px !important;
-    /* Force uniform width */
-    width: 380px !important;
+    flex: 0 0 min(380px, 85vw) !important;
+    /* Force uniform width but responsive */
+    width: min(380px, 85vw) !important;
     animation: none !important;
     /* Disable entrance animation for marquee */
     opacity: 1 !important;
@@ -1896,7 +1910,11 @@ footer i {
     }
 
     .projects-marquee .project-card {
-        width: 300px !important;
-        flex: 0 0 300px !important;
+        width: min(300px, 90vw) !important;
+        flex: 0 0 min(300px, 90vw) !important;
+    }
+
+    .marquee-container {
+        padding: 2em 0.5rem;
     }
 }
