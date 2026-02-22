@@ -5,7 +5,7 @@ import compression from "vite-plugin-compression";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/portfolio-2/',
+  base: '/portfolio/',
   server: {
     host: "::",
     port: 8080,
