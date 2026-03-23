@@ -1,6 +1,3 @@
-// API base URL: same origin when served with backend, or set window.API_BASE (e.g. http://localhost:3000)
-const API_BASE = typeof window !== "undefined" && window.API_BASE ? window.API_BASE : "";
-
 // Initialize AOS
 AOS.init({
   duration: 1000,
@@ -119,43 +116,17 @@ document.querySelectorAll(".level-bar").forEach(function (bar) {
   observer.observe(bar);
 });
 
-// Contact Form – submit to API when available
+// Contact Form – Static version without backend
 const contactForm = document.getElementById("contact-form");
 if (contactForm) {
   contactForm.addEventListener("submit", async function (e) {
     e.preventDefault();
     const msgEl = contactForm.querySelector(".form-message");
-    const formData = {
-      name: contactForm.name.value.trim(),
-      email: contactForm.email.value.trim(),
-      message: contactForm.message.value.trim(),
-    };
-    if (!API_BASE) {
-      msgEl.textContent = "Thank you! Your message has been sent.";
-      msgEl.style.color = "#4cc9f0";
-      contactForm.reset();
-      setTimeout(() => (msgEl.textContent = ""), 4200);
-      return;
-    }
-    try {
-      const res = await fetch(`${API_BASE}/api/messages`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (res.ok && data.success) {
-        msgEl.textContent = "Thank you! Your message has been sent.";
-        msgEl.style.color = "#4cc9f0";
-        contactForm.reset();
-      } else {
-        msgEl.textContent = data.message || "Something went wrong. Try again.";
-        msgEl.style.color = "#e74c3c";
-      }
-    } catch (err) {
-      msgEl.textContent = "Network error. Check backend or try again.";
-      msgEl.style.color = "#e74c3c";
-    }
+    
+    // Just show success message (no actual backend submission)
+    msgEl.textContent = "Thank you! Your message has been received.";
+    msgEl.style.color = "#4cc9f0";
+    contactForm.reset();
     setTimeout(() => (msgEl.textContent = ""), 4200);
   });
 }
@@ -214,63 +185,10 @@ document.addEventListener("mousemove", (e) => {
     });
 });
 
-// Projects from API (optional – fallback to static HTML)
-const VISUAL_CLASSES = ["visual-brazely", "visual-bondok", "visual-flower", "visual-basbosa", "visual-shopery", "visual-default"];
-const TECH_ICONS = { react: "fab fa-react", html5: "fab fa-html5", css: "fab fa-css3-alt", js: "fab fa-js", node: "fab fa-node-js", php: "fab fa-php", wordpress: "fab fa-wordpress", sql: "fas fa-database", mongodb: "fab fa-envira" };
-function techToIcon(name) {
-  const key = (name || "").toLowerCase().replace(/\s+/g, "");
-  return TECH_ICONS[key] || "fas fa-code";
-}
-function buildProjectCard(project, index) {
-  const visualClass = VISUAL_CLASSES[index % VISUAL_CLASSES.length];
-  const url = project.projectUrl || "#";
-  const techStack = Array.isArray(project.techStack) ? project.techStack : [];
-  const techHtml = techStack.length
-    ? techStack.map((t) => `<i class="${techToIcon(t)}" title="${t}"></i>`).join("")
-    : '<i class="fas fa-code"></i>';
-  const imgStyle = project.imageUrl ? `background:url(${project.imageUrl}) center/cover;` : "";
-  return `
-    <div class="project-card compact">
-      <a href="${url}" target="_blank" rel="noopener" class="project-image-link">
-        <div class="project-visual ${visualClass}" style="${imgStyle}">
-          ${!project.imageUrl ? '<i class="fas fa-folder-open"></i>' : ""}
-          <div class="image-overlay">
-            <i class="fas fa-external-link-alt"></i>
-            <span>View Project</span>
-          </div>
-        </div>
-      </a>
-      <div class="project-body">
-        <h4>${escapeHtml(project.title)}</h4>
-        <p>${escapeHtml(project.description || "")}</p>
-        <div class="project-tech">${techHtml}</div>
-      </div>
-    </div>`;
-}
-function escapeHtml(text) {
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-// MARQUEE INFINITE LOOP LOGIC + optional API projects
+// MARQUEE INFINITE LOOP LOGIC
 document.addEventListener("DOMContentLoaded", () => {
   const marquee = document.querySelector(".projects-marquee");
   if (!marquee) return;
-
-  let filledByApi = false;
-  async function tryLoadProjects() {
-    if (!API_BASE) return;
-    try {
-      const res = await fetch(`${API_BASE}/api/projects`);
-      const json = await res.json();
-      if (res.ok && json.success && json.data && json.data.length > 0) {
-        marquee.innerHTML = json.data.map((p, i) => buildProjectCard(p, i)).join("");
-        filledByApi = true;
-        cloneMarqueeContent();
-      }
-    } catch (_) {}
-  }
 
   function cloneMarqueeContent() {
     const cards = Array.from(marquee.children);
@@ -279,7 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  tryLoadProjects().then(() => {
-    if (!filledByApi) cloneMarqueeContent();
-  });
+  // Clone the existing static HTML projects for infinite scroll
+  cloneMarqueeContent();
 });
